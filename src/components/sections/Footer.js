@@ -43,23 +43,26 @@ const Footer = () => (
     `}
     render={data => (
       <React.Fragment>
-        <Art>
+        {/* <Art>
           <Img
             fluid={data.art_pot.childImageSharp.fluid}
             style={{ width: 480, maxWidth: '100%', marginBottom: -16 }}
           />
-        </Art>
+        </Art> */}
         <FooterWrapper>
           <StyledContainer>
             <Copyright>
-              <h2>Absurd</h2>
-              <span>
-                Illustrations by
+              {/* <h2>Andrea Grønlund</h2> */}
+              <p>Telefon: 12345678</p>
+              <br />
+              <p>Mail: andreagmogensen@gmail.com</p>
+              {/* <span>
+                Udviklet af 
                 {` `}
-                <ExternalLink href="https://twitter.com/diana_valeanu">
-                  @diana_valeanu
+                <ExternalLink href="https://enterfloat.dk">
+                  EnterFloat
                 </ExternalLink>
-              </span>
+              </span> */}
             </Copyright>
             <SocialIcons>
               {SOCIAL.map(({ icon, link }) => (
@@ -90,14 +93,15 @@ const SocialIcons = styled.div`
 `;
 
 const FooterWrapper = styled.footer`
-  background-color: ${props => props.theme.color.primary};
+  background-color: ${props => props.theme.color.white.regular};
+
   padding: 32px 0;
 `;
 
 const Copyright = styled.div`
   font-family: ${props => props.theme.font.secondary};
   ${props => props.theme.font_size.small};
-  color: ${props => props.theme.color.black.regular};
+  color: ${props => props.theme.color.primary};
 
   a {
     text-decoration: none;

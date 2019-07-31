@@ -2,13 +2,13 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 const SEO_DATA = {
-  description: 'An absurd gatsby starter',
-  title: 'Absurd',
-  url: '',
-  author: 'ajayns',
-  keywords: ['gatsby', 'site', 'absurd'],
+  description: 'Andrea Grønlund',
+  title: 'Andrea Grønlund',
+  url: 'andreagronlund.dk',
+  author: 'Andrea Grønlund Mogensen',
+  keywords: ['skuespiller', 'ung', 'pige', 'nordjylland', 'teater', 'skuespil', 'film', 'statist'],
   twitter: {
-    id: '@ajayns08',
+    id: '',
     img: '',
   },
   facebook: {
