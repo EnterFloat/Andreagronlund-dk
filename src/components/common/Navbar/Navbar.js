@@ -60,8 +60,8 @@ class Navbar extends Component {
     activeStyle={{
       opacity: 1,
       paddingBottom: "1px",
-      borderBottom: "1px solid red"}}
-     onClick={this.closeMobileMenu}>
+      borderBottom: "1px solid #fc3517"
+      }} onClick={this.closeMobileMenu}>
       {text}
     </Link>
   );
