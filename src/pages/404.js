@@ -6,8 +6,10 @@ import { Container } from '@components/global';
 const NotFoundPage = () => (
   <Layout>
     <Container>
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+      <br />
+      <br />
+      <h1>IKKE FUNDET</h1>
+      <p>Siden du søger findes ikke... Hvor trist.</p>
     </Container>
   </Layout>
 );
