@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-import { Container } from '@components/global';
+
+// import { Container } from '@components/global';
 import ExternalLink from '@common/ExternalLink';
 
 const Header = () => (
@@ -45,7 +46,7 @@ const Header = () => (
           width
         }
           asset {
-            fluid(maxWidth: 400, maxHeight: 400) {
+            fluid(maxWidth: 872, maxHeight: 981) {
             ...GatsbySanityImageFluid
           }
           }
@@ -69,20 +70,20 @@ const Header = () => (
 
             <Text>
               
-              <h1>
+              <h1 style={MarginBottom}>
                 {firstName(node.name)}
                 <br />
                 {lastName(node.name)}
                 <br />
               </h1>
-              <h1 style={MarginBottom}>
+              <h1>
                 {node.pagesubtitle}
               </h1>
               <br />
               <p>
-                <StyledExternalLink href="https://github.com/ajayns/gatsby-absurd">
+                <StyledLink to="om-mig">
                   Om mig &nbsp;&#x2794;
-                </StyledExternalLink>
+                </StyledLink>
               </p>
             </Text>
             ))}
@@ -103,15 +104,14 @@ function lastName(name) {
 }
 
 var MarginBottom = {
-  marginBottom: '20px',
+  marginBottom: '8px',
 }
 
 const HeaderWrapper = styled.header`
   background-color: ${props => props.theme.color.white.regular};
-  padding-top: 96px;
 
   @media (max-width: ${props => props.theme.screen.md}) {
-    padding-top: 128px;
+    padding-top: 30px;
   }
 `;
 
@@ -144,7 +144,7 @@ const Grid = styled.div`
 
   @media (max-width: ${props => props.theme.screen.md}) {
     grid-template-columns: 1fr;
-    grid-gap: 80px;
+    grid-gap: 40px;
 
     > ${Margin} {
       order: 2;
@@ -160,13 +160,44 @@ const Text = styled.div`
   }
 `;
 
-const StyledExternalLink = styled(ExternalLink)`
+const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
 
   &:hover {
     color: ${props => props.theme.color.black.regular};
   }
+`;
+
+const Container = styled.div`
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @media (min-width: ${props => props.theme.screen.xs}) {
+    max-width: 540px;
+  }
+
+  @media (min-width: ${props => props.theme.screen.sm}) {
+    max-width: 720px;
+  }
+
+  @media (min-width: ${props => props.theme.screen.md}) {
+    max-width: 960px;
+  }
+
+  @media (min-width: ${props => props.theme.screen.lg}) {
+    max-width: 1600px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  ${props =>
+    props.fluid &&
+    `
+    max-width: 1200px !important;
+  `};
 `;
 
 export default Header;

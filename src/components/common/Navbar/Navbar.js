@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
+import { Link } from 'gatsby';
 
 import { Container } from '@components/global';
 import {
@@ -11,11 +12,33 @@ import {
   NavListWrapper,
   MobileMenu,
   Mobile,
+  ActiveNavItem,
 } from './style';
 
 import { ReactComponent as MenuIcon } from '@static/icons/menu.svg';
 
-const NAV_ITEMS = ['Hjem', 'Om mig', 'CV', 'Media', 'Kontakt'];
+const NAV_ITEMS = [
+  {
+    text: 'Hjem',
+    link: '',
+  },
+  {
+    text: 'Om mig',
+    link: 'om-mig',
+  },
+  {
+    text: 'CV',
+    link: 'cv',
+  },
+  {
+    text: 'Media',
+    link: 'media',
+  },
+  {
+    text: 'Kontakt',
+    link: 'kontakt',
+  },
+];
 
 class Navbar extends Component {
   state = {
@@ -32,22 +55,29 @@ class Navbar extends Component {
     }
   };
 
-  getNavAnchorLink = item => (
-    <AnchorLink href={`#${item.toLowerCase()}`} onClick={this.closeMobileMenu}>
-      {item}
-    </AnchorLink>
+  getNavAnchorLink = ({text, link}) => (
+    <Link to={`/${link}/`} 
+    activeStyle={{
+      opacity: 1,
+      paddingBottom: "1px",
+      borderBottom: "1px solid red"}}
+     onClick={this.closeMobileMenu}>
+      {text}
+    </Link>
   );
 
+  
+  
   getNavList = ({ mobile = false }) => (
     <NavListWrapper mobile={mobile}>
       <Scrollspy
-        items={NAV_ITEMS.map(item => item.toLowerCase())}
+        items={NAV_ITEMS.map((link) => link)}
         currentClassName="active"
         mobile={mobile}
         offset={-64}
       >
-        {NAV_ITEMS.map(navItem => (
-          <NavItem key={navItem}>{this.getNavAnchorLink(navItem)}</NavItem>
+        {NAV_ITEMS.map((text, link) => (
+          <NavItem key={link}>{this.getNavAnchorLink(text, link)}</NavItem>
         ))}
       </Scrollspy>
     </NavListWrapper>

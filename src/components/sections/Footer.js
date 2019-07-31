@@ -6,41 +6,47 @@ import Img from 'gatsby-image';
 import { Container } from '@components/global';
 import ExternalLink from '@common/ExternalLink';
 
-import GithubIcon from '@static/icons/github.svg';
+import FacebookIcon from '@static/icons/facebook.svg';
 import InstagramIcon from '@static/icons/instagram.svg';
 import TwitterIcon from '@static/icons/twitter.svg';
 
 const SOCIAL = [
   {
-    icon: GithubIcon,
-    link: 'https://github.com/ajayns/gatsby-absurd',
+    icon: FacebookIcon,
+    link: 'https://www.facebook.com/',
   },
   {
     icon: InstagramIcon,
-    link: 'https://instagram.com/ajay_ns',
+    link: 'https://www.instagram.com/',
   },
   {
     icon: TwitterIcon,
-    link: 'https://twitter.com/ajayns08',
+    link: 'https://twitter.com/',
   },
 ];
 
 const Footer = () => (
   <StaticQuery
     query={graphql`
-      query {
-        art_pot: file(
-          sourceInstanceName: { eq: "art" }
-          name: { eq: "customers_pot" }
-        ) {
-          childImageSharp {
-            fluid(maxWidth: 960) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
-            }
-          }
+    query FooterQuery {
+    allSanityGeneral(limit: 1) {
+      edges {
+        node {
+          name
+          pagetitle
+          email
+          mobile
+          instagram
+          dask
         }
       }
-    `}
+    }
+    site {
+      buildTime(formatString: "DD/MM/YYYY")
+    }
+  }
+
+`}
     render={data => (
       <React.Fragment>
         {/* <Art>
@@ -50,12 +56,15 @@ const Footer = () => (
           />
         </Art> */}
         <FooterWrapper>
+        <hr />
           <StyledContainer>
             <Copyright>
+              {data.allSanityGeneral.edges.map(({ node }) => (
+              <div>
               {/* <h2>Andrea Grønlund</h2> */}
-              <p>Telefon: 12345678</p>
+              <p>Telefon: {node.mobile}</p>
               <br />
-              <p>Mail: andreagmogensen@gmail.com</p>
+              <p>Mail: {node.email}</p>
               {/* <span>
                 Udviklet af 
                 {` `}
@@ -63,6 +72,13 @@ const Footer = () => (
                   EnterFloat
                 </ExternalLink>
               </span> */}
+              <br />
+              </div>
+              ))}
+
+              <p>Sidst opdateret {data.site.buildTime}</p>
+
+            
             </Copyright>
             <SocialIcons>
               {SOCIAL.map(({ icon, link }) => (

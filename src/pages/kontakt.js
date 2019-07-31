@@ -2,17 +2,16 @@ import React from 'react';
 
 import Layout from '@common/Layout';
 import Navbar from '@common/Navbar';
-
-import Header from '@sections/Header';
+import Kontakt from '@sections/Kontakt';
 import Footer from '@sections/Footer';
 
-const IndexPage = ({ data }) => (
+const KontaktPage = () => (
   
   <Layout>
     <Navbar />
-    <Header />        
+    <Kontakt />
     <Footer /> 
   </Layout>
 );
 
-export default IndexPage
+export default KontaktPage

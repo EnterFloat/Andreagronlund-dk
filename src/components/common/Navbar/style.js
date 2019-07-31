@@ -39,6 +39,12 @@ export const NavListWrapper = styled.div`
   }
 `;
 
+export const ActiveNavItem = styled.p`
+padding-bottom: 1px;
+border-bottom: 1px solid red;
+color: red;
+`;
+
 export const NavItem = styled.li`
   margin: 0 0.75em;
   font-family: ${props => props.theme.font.secondary};
@@ -59,7 +65,7 @@ export const NavItem = styled.li`
 
 export const MobileMenu = styled.div`
   width: 100%;
-  background: ${props => props.theme.color.primary};
+  background: ${props => props.theme.color.white};
 `;
 
 export const Brand = styled.div`

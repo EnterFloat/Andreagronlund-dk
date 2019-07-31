@@ -2,17 +2,16 @@ import React from 'react';
 
 import Layout from '@common/Layout';
 import Navbar from '@common/Navbar';
-
-import Header from '@sections/Header';
+import Cv from '@sections/Cv';
 import Footer from '@sections/Footer';
 
-const IndexPage = ({ data }) => (
+const CVPage = () => (
   
   <Layout>
     <Navbar />
-    <Header />        
+    <Cv />
     <Footer /> 
   </Layout>
 );
 
-export default IndexPage
+export default CVPage
