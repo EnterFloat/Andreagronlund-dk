@@ -62,9 +62,9 @@ const Footer = () => (
               {data.allSanityGeneral.edges.map(({ node }) => (
               <div>
               {/* <h2>Andrea Grønlund</h2> */}
-              <p>Telefon: {node.mobile}</p>
+              <Text>Telefon: {node.mobile}</Text>
               <br />
-              <p>Mail: {node.email}</p>
+              <Text>Mail: {node.email}</Text>
               {/* <span>
                 Udviklet af 
                 {` `}
@@ -76,7 +76,7 @@ const Footer = () => (
               </div>
               ))}
 
-              <p>Sidst opdateret {data.site.buildTime}</p>
+              <Text>Sidst opdateret {data.site.buildTime}</Text>
 
             
             </Copyright>
@@ -141,6 +141,10 @@ const StyledContainer = styled(Container)`
     flex-direction: column;
     text-align: center;
   }
+`;
+
+const Text = styled.p`
+  font-size: 1em;
 `;
 
 export default Footer;

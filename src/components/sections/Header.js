@@ -81,7 +81,7 @@ const Header = () => (
               </h1>
               <br />
               <p>
-                <StyledLink to="om-mig">
+                <StyledLink to="om-mig/">
                   Om mig &nbsp;&#x2794;
                 </StyledLink>
               </p>
