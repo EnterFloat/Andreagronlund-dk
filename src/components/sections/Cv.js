@@ -1,45 +1,40 @@
 import React from 'react';
-import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
-
-import { Section, Container } from '@components/global';
+import { Container } from '@components/global';
 
 const Cv = () => (
   <StaticQuery
     query={graphql`
-    query CvQuery {
-        allSanityGeneral (limit: 1) {
-            edges {
+      query CvQuery {
+        allSanityGeneral(limit: 1) {
+          edges {
             node {
-                name
-                pagetitle
-                pagesubtitle
-                email
-                mobile
-                instagram
-                dask
+              name
+              pagetitle
+              pagesubtitle
+              email
+              mobile
+              instagram
+              dask
             }
-        }  
-    }
-    }
+          }
+        }
+      }
     `}
     render={data => (
-        <Container>
+      <Container>
         {data.allSanityGeneral.edges.map(({ node }) => (
-            <div>
-        <p>
-            CV
-            <br/>
-            {node.mobile}
-            
-        </p>
-        </div>
+          <div key="container">
+            <p>
+              CV
+              <br />
+              {node.mobile}
+            </p>
+          </div>
         ))}
-        </Container>
+      </Container>
     )}
   />
 );
-
 
 export default Cv;

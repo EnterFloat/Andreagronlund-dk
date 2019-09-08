@@ -3,91 +3,79 @@ import styled from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-
-// import { Container } from '@components/global';
-import ExternalLink from '@common/ExternalLink';
-
 const Header = () => (
   <StaticQuery
-  query={graphql`
-  query HeaderQuery {
-   allSanityGeneral (limit: 1) {
-  	edges {
-      node {
-        name
-        pagetitle
-        pagesubtitle
-        email
-        mobile
-        instagram
-        dask
-      }
-    }  
-  }
-  allSanityFrontpageimages (limit: 1) {
-    edges {
-      node {
-        id
-        frontpageimage {
-          crop {
-          _key
-          _type
-          top
-          bottom
-          left
-          right
-        }
-        hotspot {
-          _key
-          _type
-          x
-          y
-          height
-          width
-        }
-          asset {
-            fluid(maxWidth: 872, maxHeight: 981) {
-            ...GatsbySanityImageFluid
-          }
+    query={graphql`
+      query HeaderQuery {
+        allSanityGeneral(limit: 1) {
+          edges {
+            node {
+              name
+              pagetitle
+              pagesubtitle
+              email
+              mobile
+              instagram
+              dask
+            }
           }
         }
+        allSanityFrontpageimages(limit: 1) {
+          edges {
+            node {
+              id
+              frontpageimage {
+                crop {
+                  _key
+                  _type
+                  top
+                  bottom
+                  left
+                  right
+                }
+                hotspot {
+                  _key
+                  _type
+                  x
+                  y
+                  height
+                  width
+                }
+                asset {
+                  fluid(maxWidth: 872, maxHeight: 981) {
+                    ...GatsbySanityImageFluid
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-  }
-}
-`}
+    `}
     render={data => (
       <HeaderWrapper id="hjem">
         <Container>
           <Grid>
             <Margin>
-            {data.allSanityFrontpageimages.edges.map(({ node }) => (
-
-              <Img fluid={node.frontpageimage.asset.fluid} />
-            ))}
+              {data.allSanityFrontpageimages.edges.map(({ node }) => (
+                <Img key={node.id} fluid={node.frontpageimage.asset.fluid} />
+              ))}
             </Margin>
             {data.allSanityGeneral.edges.map(({ node }) => (
-
-            <Text>
-              
-              <h1 style={MarginBottom}>
-                {firstName(node.name)}
+              <Text key="text">
+                <h1 key="firstName" style={MarginBottom}>
+                  {firstName(node.name)}
+                  <br />
+                  {lastName(node.name)}
+                  <br />
+                </h1>
+                <h1 key="pageSubtitle">{node.pagesubtitle}</h1>
                 <br />
-                {lastName(node.name)}
-                <br />
-              </h1>
-              <h1>
-                {node.pagesubtitle}
-              </h1>
-              <br />
-              <p>
-                <StyledLink to="om-mig/">
-                  Om mig &nbsp;&#x2794;
-                </StyledLink>
-              </p>
-            </Text>
+                <p>
+                  <StyledLink to="/om-mig">Om mig &nbsp;&#x2794;</StyledLink>
+                </p>
+              </Text>
             ))}
-
           </Grid>
         </Container>
       </HeaderWrapper>
@@ -96,16 +84,21 @@ const Header = () => (
 );
 
 function firstName(name) {
-  const ar = name.split(" ");
+  const ar = name.split(' ');
   return ar[0];
 }
 function lastName(name) {
-  return name.slice(name.indexOf(" "));
+  return name.slice(name.indexOf(' '));
 }
 
 var MarginBottom = {
   marginBottom: '8px',
-}
+};
+
+// const ConsoleLog = ({ children }) => {
+//   console.log(children);
+//   return false;
+// };
 
 const HeaderWrapper = styled.header`
   background-color: ${props => props.theme.color.white.regular};
@@ -115,25 +108,11 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-const Art = styled.figure`
-  width: 100%;
-  margin: 0;
-
-  > div {
-    width: 120%;
-    margin-bottom: -4.5%;
-
-    @media (max-width: ${props => props.theme.screen.md}) {
-      width: 100%;
-    }
-  }
-`;
-
 const Margin = styled.div`
-margin: 0px;
-@media (max-width: ${props => props.theme.screen.lg}) {
-  margin: 0 50px;
-}  
+  margin: 0px;
+  @media (max-width: ${props => props.theme.screen.lg}) {
+    margin: 0 50px;
+  }
 `;
 
 const Grid = styled.div`

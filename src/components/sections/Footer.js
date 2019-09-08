@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
 
 import { Container } from '@components/global';
 import ExternalLink from '@common/ExternalLink';
@@ -28,25 +27,24 @@ const SOCIAL = [
 const Footer = () => (
   <StaticQuery
     query={graphql`
-    query FooterQuery {
-    allSanityGeneral(limit: 1) {
-      edges {
-        node {
-          name
-          pagetitle
-          email
-          mobile
-          instagram
-          dask
+      query FooterQuery {
+        allSanityGeneral(limit: 1) {
+          edges {
+            node {
+              name
+              pagetitle
+              email
+              mobile
+              instagram
+              dask
+            }
+          }
+        }
+        site {
+          buildTime(formatString: "DD/MM/YYYY")
         }
       }
-    }
-    site {
-      buildTime(formatString: "DD/MM/YYYY")
-    }
-  }
-
-`}
+    `}
     render={data => (
       <React.Fragment>
         {/* <Art>
@@ -56,34 +54,32 @@ const Footer = () => (
           />
         </Art> */}
         <FooterWrapper>
-        <hr />
+          <hr />
           <StyledContainer>
             <Copyright>
               {data.allSanityGeneral.edges.map(({ node }) => (
-              <div>
-              {/* <h2>Andrea Grønlund</h2> */}
-              <Text>Telefon: {node.mobile}</Text>
-              <br />
-              <Text>Mail: {node.email}</Text>
-              {/* <span>
+                <div key="container">
+                  {/* <h2>Andrea Grønlund</h2> */}
+                  <Paragraph key="mobile">Telefon: {node.mobile}</Paragraph>
+                  <br />
+                  <Paragraph key="mail">Mail: {node.email}</Paragraph>
+                  {/* <span>
                 Udviklet af 
                 {` `}
                 <ExternalLink href="https://enterfloat.dk">
                   EnterFloat
                 </ExternalLink>
               </span> */}
-              <br />
-              </div>
+                  <br />
+                </div>
               ))}
 
-              <Text>Sidst opdateret {data.site.buildTime}</Text>
-
-            
+              <Paragraph>Sidst opdateret {data.site.buildTime}</Paragraph>
             </Copyright>
             <SocialIcons>
               {SOCIAL.map(({ icon, link }) => (
-                <ExternalLink href={link}>
-                  <img src={icon} alt="link" />
+                <ExternalLink key={icon} href={link}>
+                  <img key={"img" + icon} src={icon} alt="link" />
                 </ExternalLink>
               ))}
             </SocialIcons>
@@ -125,13 +121,6 @@ const Copyright = styled.div`
   }
 `;
 
-const Art = styled.figure`
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  margin-top: 48px;
-`;
-
 const StyledContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
@@ -143,7 +132,7 @@ const StyledContainer = styled(Container)`
   }
 `;
 
-const Text = styled.p`
+const Paragraph = styled.p`
   font-size: 1em;
 `;
 

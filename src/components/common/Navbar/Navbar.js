@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
 import { Link } from 'gatsby';
 
@@ -12,7 +11,6 @@ import {
   NavListWrapper,
   MobileMenu,
   Mobile,
-  ActiveNavItem,
 } from './style';
 
 import { ReactComponent as MenuIcon } from '@static/icons/menu.svg';
@@ -56,7 +54,7 @@ class Navbar extends Component {
   };
 
   getNavAnchorLink = ({text, link}) => (
-    <Link to={`/${link}/`} 
+    <Link to={`/${link}`} 
     activeStyle={{
       opacity: 1,
       paddingBottom: "1px",
@@ -71,11 +69,12 @@ class Navbar extends Component {
   getNavList = ({ mobile = false }) => (
     <NavListWrapper mobile={mobile}>
       <Scrollspy
-        items={NAV_ITEMS.map((link) => link)}
         currentClassName="active"
         mobile={mobile}
         offset={-64}
-      >
+      >   
+        {/* items={NAV_ITEMS.map((link) => link)} */}
+   
         {NAV_ITEMS.map((text, link) => (
           <NavItem key={link}>{this.getNavAnchorLink(text, link)}</NavItem>
         ))}

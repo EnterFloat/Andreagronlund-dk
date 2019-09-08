@@ -1,9 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
-
-import { Section, Container } from '@components/global';
+import { Container } from '@components/global';
 
 const Kontakt = () => (
   <StaticQuery
@@ -27,8 +24,7 @@ const Kontakt = () => (
     render={data => (
       <Container>
         {data.allSanityGeneral.edges.map(({ node }) => (
-          <div>
-            <p>
+          <div key="container">
               Kontakt
               <br />
               Her kan du sende en besked til mig
@@ -62,7 +58,6 @@ const Kontakt = () => (
                 </p>
               </form>
               {node.mobile}
-            </p>
           </div>
         ))}
       </Container>
