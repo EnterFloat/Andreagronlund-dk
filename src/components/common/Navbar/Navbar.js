@@ -1,112 +1,111 @@
-import React, { Component } from 'react';
-import Scrollspy from 'react-scrollspy';
-import { Link } from 'gatsby';
+// import React from 'react';
+import React from 'react';
+import { StaticQuery, graphql, Link } from 'gatsby';
+import { BrowserRouter as Router } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { Container } from '@components/global';
-import {
-  Nav,
-  NavItem,
-  Brand,
-  StyledContainer,
-  NavListWrapper,
-  MobileMenu,
-  Mobile,
-} from './style';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-import { ReactComponent as MenuIcon } from '@static/icons/menu.svg';
-
-const NAV_ITEMS = [
-  {
-    text: 'Hjem',
-    link: '',
-  },
-  {
-    text: 'Om mig',
-    link: 'om-mig',
-  },
-  {
-    text: 'CV',
-    link: 'cv',
-  },
-  {
-    text: 'Media',
-    link: 'media',
-  },
-  {
-    text: 'Kontakt',
-    link: 'kontakt',
-  },
-];
-
-class Navbar extends Component {
-  state = {
-    mobileMenuOpen: false,
-  };
-
-  toggleMobileMenu = () => {
-    this.setState(prevState => ({ mobileMenuOpen: !prevState.mobileMenuOpen }));
-  };
-
-  closeMobileMenu = () => {
-    if (this.state.mobileMenuOpen) {
-      this.setState({ mobileMenuOpen: false });
-    }
-  };
-
-  getNavAnchorLink = ({text, link}) => (
-    <Link to={`/${link}`} 
-    activeStyle={{
-      opacity: 1,
-      paddingBottom: "1px",
-      borderBottom: "1px solid #fc3517"
-      }} onClick={this.closeMobileMenu}>
-      {text}
-    </Link>
-  );
-
-  
-  
-  getNavList = ({ mobile = false }) => (
-    <NavListWrapper mobile={mobile}>
-      <Scrollspy
-        currentClassName="active"
-        mobile={mobile}
-        offset={-64}
-      >   
-        {/* items={NAV_ITEMS.map((link) => link)} */}
-   
-        {NAV_ITEMS.map((text, link) => (
-          <NavItem key={link}>{this.getNavAnchorLink(text, link)}</NavItem>
+const MainNavbar = () => (
+  <StaticQuery
+    query={graphql`
+      query NavbarQuery {
+        allSanityGeneral(limit: 1) {
+          edges {
+            node {
+              pagetitle
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Router>
+        {data.allSanityGeneral.edges.map(({ node }) => (
+          <Navbar bg="light" expand="lg" fixed="top">
+            <div className="container-fluid">
+              <Link
+                to={'/'}
+                className={'navbar-brand'}
+                activeClassName={'active'}
+              >
+                {node.pagetitle}
+              </Link>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse className="justify-content-end">
+                <Nav className="justify-content-end">
+                  <NavLink
+                    to={'/'}
+                    className={'nav-link navbar-right'}
+                    activeClassName={'active'}
+                  >
+                    Hjem
+                  </NavLink>
+                  <NavLink
+                    to={'/om-mig'}
+                    className={'nav-link navbar-right'}
+                    activeClassName={'active'}
+                  >
+                    Om mig
+                  </NavLink>
+                  <NavLink
+                    to={'/cv'}
+                    className={'nav-link navbar-right'}
+                    activeClassName={'active'}
+                  >
+                    CV
+                  </NavLink>
+                  <StyledNavDropdown
+                    title="Media"
+                    id="basic-nav-dropdown navbar-right"
+                    alignRight="true"
+                  >
+                    <Link
+                      to={'/film'}
+                      className={'dropdown-item'}
+                      activeClassName={'active'}
+                    >
+                      Film
+                    </Link>
+                    <Link
+                      to={'/castingbilleder'}
+                      className={'dropdown-item'}
+                      activeClassName={'active'}
+                    >
+                      Castingbilleder
+                    </Link>
+                    <Link
+                      to={'/showreel'}
+                      className={'dropdown-item'}
+                      activeClassName={'active'}
+                    >
+                      Showreel
+                    </Link>
+                  </StyledNavDropdown>
+                  <NavLink
+                    to={'/kontakt'}
+                    className={'nav-link navbar-right'}
+                    activeClassName={'active'}
+                  >
+                    Kontakt
+                  </NavLink>
+                </Nav>
+              </Navbar.Collapse>
+            </div>
+          </Navbar>
         ))}
-      </Scrollspy>
-    </NavListWrapper>
-  );
+      </Router>
+    )}
+  />
+);
 
-  render() {
-    const { mobileMenuOpen } = this.state;
+const NavLink = styled(Link)`
+  margin-right: 20px;
+  margin-left: 20px;
+`;
+const StyledNavDropdown = styled(NavDropdown)`
+  margin-right: 20px;
+  margin-left: 20px;
+`;
 
-    return (
-      <Nav {...this.props}>
-        <StyledContainer>
-          <Brand>{this.props.pagetitle}</Brand>
-          <Mobile>
-            <button onClick={this.toggleMobileMenu} style={{ color: 'black' }}>
-              <MenuIcon />
-            </button>
-          </Mobile>
-
-          <Mobile hide>{this.getNavList({})}</Mobile>
-        </StyledContainer>
-        <Mobile>
-          {mobileMenuOpen && (
-            <MobileMenu>
-              <Container>{this.getNavList({ mobile: true })}</Container>
-            </MobileMenu>
-          )}
-        </Mobile>
-      </Nav>
-    );
-  }
-}
-
-export default Navbar;
+export default MainNavbar;

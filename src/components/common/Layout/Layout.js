@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SEO from '@common/SEO';
 
@@ -24,7 +24,7 @@ Layout.propTypes = {
 };
 
 const TopMargin = styled.div`
-  padding-top: 62px;
+  padding-top: 55px;
 `;
 
 
