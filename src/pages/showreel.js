@@ -6,7 +6,7 @@ import Video from '@common/Video';
 
 // import { Button } from 'react-bootstrap';
 
-const Showreel = () => (
+const ShowreelPage = () => (
   
   <Layout>
     <MainNavbar />
@@ -20,4 +20,4 @@ const Showreel = () => (
   </Layout>
 );
 
-export default Showreel
+export default ShowreelPage
