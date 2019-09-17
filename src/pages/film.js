@@ -6,7 +6,7 @@ import Video from '@common/Video';
 
 // import { Button } from 'react-bootstrap';
 
-const MediaPage = () => (
+const Film = () => (
   
   <Layout>
     <MainNavbar />
@@ -20,4 +20,4 @@ const MediaPage = () => (
   </Layout>
 );
 
-export default MediaPage
+export default Film
