@@ -3,9 +3,6 @@ import Layout from '@common/Layout';
 import MainNavbar from '@common/Navbar';
 import Film from '@sections/Film';
 import Footer from '@sections/Footer';
-import Video from '@common/Video';
-
-// import { Button } from 'react-bootstrap';
 
 const FilmPage = () => (
   
