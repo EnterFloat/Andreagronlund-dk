@@ -9,7 +9,11 @@ import Component from 'gatsby';
 import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-// import { createMemoryHistory } from 'history';
+
+import { createBrowserHistory } from 'history';
+
+const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
+
 
 // const history = createMemoryHistory();
 
@@ -102,7 +106,7 @@ const MainNavbar = (Component) => (
           </Navbar>
         ))}
         <div>
-          <Router>
+          <Router history={history}>
             <Route path="/" exact component={Component.IndexPage} />
           </Router>
         </div>
