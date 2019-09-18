@@ -5,6 +5,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { createMemoryHistory } from 'history';
+
+
+const history = createMemoryHistory();
+
 
 const MainNavbar = () => (
   <StaticQuery
@@ -20,7 +25,7 @@ const MainNavbar = () => (
       }
     `}
     render={data => (
-      <Router>
+      <Router history={history}>
         {data.allSanityGeneral.edges.map(({ node }) => (
           <Navbar bg="light" expand="lg" fixed="top">
             <div className="container-fluid">
@@ -94,7 +99,7 @@ const MainNavbar = () => (
             </div>
           </Navbar>
         ))}
-      </Router>
+        </Router>
     )}
   />
 );
