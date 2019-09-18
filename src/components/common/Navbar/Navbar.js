@@ -2,6 +2,8 @@
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import { BrowserRouter as Router } from 'react-router-dom';
+// import { Router } from 'react-router';
+
 import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
