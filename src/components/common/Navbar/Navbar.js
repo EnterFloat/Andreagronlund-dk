@@ -2,7 +2,7 @@
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { StaticRouter as Router, Route } from 'react-router-dom'
 // import { Router } from 'react-router';
 import Component from 'gatsby';
 
