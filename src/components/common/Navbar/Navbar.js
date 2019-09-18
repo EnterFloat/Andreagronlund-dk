@@ -4,7 +4,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import { StaticRouter as Router, Route } from 'react-router-dom'
 // import { Router } from 'react-router';
-import Component from 'gatsby';
+// import Component from 'gatsby';
 
 import styled from 'styled-components';
 
@@ -42,7 +42,7 @@ const MainNavbar = (Component) => (
               >
                 {node.pagetitle}
               </Link>
-              {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse className="justify-content-end">
                 <Nav className="justify-content-end">
                   <NavLink
@@ -101,13 +101,19 @@ const MainNavbar = (Component) => (
                     Kontakt
                   </NavLink>
                 </Nav>
-              </Navbar.Collapse> */}
+              </Navbar.Collapse>
             </div>
           </Navbar>
         ))}
         <div>
           <Router history={history}>
             <Route path="/" exact component={Component.IndexPage} />
+            <Route path="/om-mig" exact component={Component.OmMigPage} />
+            <Route path="/cv" exact component={Component.CVPage} />
+            <Route path="/film" exact component={Component.FilmPage} />
+            <Route path="/castingbilleder" exact component={Component.OmMigPage} />
+            <Route path="/showreel" exact component={Component.OmMigPage} />
+            <Route path="/kontakt" exact component={Component.KontaktPage} />
           </Router>
         </div>
       </div>
