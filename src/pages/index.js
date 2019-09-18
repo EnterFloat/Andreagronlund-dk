@@ -6,7 +6,7 @@ import MainNavbar from '@common/Navbar';
 import Header from '@sections/Header';
 import Footer from '@sections/Footer';
 
-const IndexPage = ({ data }) => (
+const IndexPage = () => (
   
   <Layout>
     <MainNavbar />

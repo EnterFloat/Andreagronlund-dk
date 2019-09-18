@@ -1,19 +1,19 @@
 // import React from 'react';
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { BrowserRouter as Router } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import { Router } from 'react-router';
+import Component from 'gatsby';
 
 import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { createMemoryHistory } from 'history';
+// import { createMemoryHistory } from 'history';
 
+// const history = createMemoryHistory();
 
-const history = createMemoryHistory();
-
-
-const MainNavbar = () => (
+const MainNavbar = (Component) => (
   <StaticQuery
     query={graphql`
       query NavbarQuery {
@@ -27,7 +27,7 @@ const MainNavbar = () => (
       }
     `}
     render={data => (
-      <Router history={history}>
+      <div>
         {data.allSanityGeneral.edges.map(({ node }) => (
           <Navbar bg="light" expand="lg" fixed="top">
             <div className="container-fluid">
@@ -55,7 +55,7 @@ const MainNavbar = () => (
                   >
                     Om mig
                   </NavLink>
-                  <NavLink
+                  {/* <NavLink
                     to={'/cv'}
                     className={'nav-link navbar-right'}
                     activeClassName={'active'}
@@ -95,13 +95,18 @@ const MainNavbar = () => (
                     activeClassName={'active'}
                   >
                     Kontakt
-                  </NavLink>
+                  </NavLink>*/}
                 </Nav>
-              </Navbar.Collapse>
+              </Navbar.Collapse> 
             </div>
           </Navbar>
         ))}
-        </Router>
+        <div>
+          <Router>
+            <Route path="/" exact component={Component.IndexPage} />
+          </Router>
+        </div>
+      </div>
     )}
   />
 );
