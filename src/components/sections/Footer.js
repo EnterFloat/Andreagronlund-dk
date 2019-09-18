@@ -7,22 +7,8 @@ import ExternalLink from '@common/ExternalLink';
 
 import FacebookIcon from '@static/icons/facebook.svg';
 import InstagramIcon from '@static/icons/instagram.svg';
-import TwitterIcon from '@static/icons/twitter.svg';
 
-const SOCIAL = [
-  {
-    icon: FacebookIcon,
-    link: 'https://www.facebook.com/',
-  },
-  {
-    icon: InstagramIcon,
-    link: 'https://www.instagram.com/',
-  },
-  {
-    icon: TwitterIcon,
-    link: 'https://twitter.com/',
-  },
-];
+const today = new Date();
 
 const Footer = () => (
   <StaticQuery
@@ -45,45 +31,49 @@ const Footer = () => (
         }
       }
     `}
+    
     render={data => (
       <React.Fragment>
-        {/* <Art>
-          <Img
-            fluid={data.art_pot.childImageSharp.fluid}
-            style={{ width: 480, maxWidth: '100%', marginBottom: -16 }}
-          />
-        </Art> */}
         <FooterWrapper>
           <hr />
-          <StyledContainer>
-            <Copyright>
-              {data.allSanityGeneral.edges.map(({ node }) => (
+          {data.allSanityGeneral.edges.map(({ node }) => (
+            <StyledContainer>
+              <Copyright>
                 <div key="container">
-                  {/* <h2>Andrea Grønlund</h2> */}
                   <Paragraph key="mobile">Telefon: {node.mobile}</Paragraph>
-                  <br />
                   <Paragraph key="mail">Mail: {node.email}</Paragraph>
-                  {/* <span>
-                Udviklet af 
-                {` `}
-                <ExternalLink href="https://enterfloat.dk">
-                  EnterFloat
-                </ExternalLink>
-              </span> */}
                   <br />
                 </div>
-              ))}
-
-              <Paragraph>Sidst opdateret {data.site.buildTime}</Paragraph>
-            </Copyright>
-            <SocialIcons>
-              {SOCIAL.map(({ icon, link }) => (
-                <ExternalLink key={icon} href={link}>
-                  <img key={"img" + icon} src={icon} alt="link" />
+                <Paragraph>Sidst opdateret {data.site.buildTime}</Paragraph>
+                <Paragraph style={{textAlign: "center"}} key="Copyright">&copy; {today.getFullYear()} - {node.name}</Paragraph>
+              </Copyright>
+              <SocialIcons>
+                <ExternalLink
+                  key={FacebookIcon}
+                  href={'https://www.facebook.com/'}
+                >
+                  <img
+                    key={'img' + FacebookIcon}
+                    src={FacebookIcon}
+                    alt="link"
+                  />
                 </ExternalLink>
-              ))}
-            </SocialIcons>
-          </StyledContainer>
+                <ExternalLink key={InstagramIcon} href={node.instagram}>
+                  <img
+                    key={'img' + InstagramIcon}
+                    src={InstagramIcon}
+                    alt="link"
+                  />
+                </ExternalLink>
+                <ExternalLink
+                  style={{ color: 'black', paddingLeft: 5 }}
+                  href={node.dask}
+                >
+                  <h4>Dask</h4>
+                </ExternalLink>
+              </SocialIcons>
+            </StyledContainer>
+          ))}
         </FooterWrapper>
       </React.Fragment>
     )}
@@ -133,7 +123,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const Paragraph = styled.p`
-  font-size: 1em;
+  font-size: 0.8em;
 `;
 
 export default Footer;
