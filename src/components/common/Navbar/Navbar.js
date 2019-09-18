@@ -38,7 +38,7 @@ const MainNavbar = (Component) => (
               >
                 {node.pagetitle}
               </Link>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse className="justify-content-end">
                 <Nav className="justify-content-end">
                   <NavLink
@@ -55,7 +55,7 @@ const MainNavbar = (Component) => (
                   >
                     Om mig
                   </NavLink>
-                  {/* <NavLink
+                   <NavLink
                     to={'/cv'}
                     className={'nav-link navbar-right'}
                     activeClassName={'active'}
@@ -95,9 +95,9 @@ const MainNavbar = (Component) => (
                     activeClassName={'active'}
                   >
                     Kontakt
-                  </NavLink>*/}
+                  </NavLink>
                 </Nav>
-              </Navbar.Collapse> 
+              </Navbar.Collapse> */}
             </div>
           </Navbar>
         ))}
