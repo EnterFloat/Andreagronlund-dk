@@ -1,7 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-// import styled from 'styled-components';
-import { Container } from '@components/global';
 import Img from 'gatsby-image';
 import { Row, Col, Container as BootstrapContainer } from 'react-bootstrap';
 
@@ -45,10 +43,13 @@ const OmMig = () => (
         {data.allSanityGeneral.edges.map(({ node }) => (
           <>
             <Row>
-              <br />
+              <Col>
+                <br />
+                <h2>Om mig</h2>
+                <br />
+              </Col>
             </Row>
-            <h2>Om mig</h2>
-            <br />
+
             <Row>
               <Col
                 xs={{ span: 8, offset: 2 }}
@@ -67,7 +68,9 @@ const OmMig = () => (
                 lg={{ span: 8, offset: 0 }}
                 xl={{ span: 8, offset: 0 }}
               >
-                <p style={{ whiteSpace: 'pre-wrap' }}>{node.aboutme}</p>
+                <p style={{ whiteSpace: 'pre-wrap', fontSize: '120%' }}>
+                  {node.aboutme}
+                </p>
                 <br />
                 <br />
               </Col>

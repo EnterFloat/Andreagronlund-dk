@@ -63,13 +63,14 @@ const Header = () => (
             </Margin>
             {data.allSanityGeneral.edges.map(({ node }) => (
               <Text key="text">
-                <h1 key="firstName" style={MarginBottom}>
+                <h2 key="firstName" style={MarginBottom}>
                   {firstName(node.name)}
-                  <br />
                   {lastName(node.name)}
                   <br />
-                </h1>
-                <h1 key="pageSubtitle">{node.pagesubtitle}</h1>
+                </h2>
+                <h2 style={{ color: '#8a8a8a' }} key="pageSubtitle">
+                  {node.pagesubtitle}
+                </h2>
                 <br />
                 <p>
                   <StyledLink to="/om-mig">Om mig &nbsp;&#x2794;</StyledLink>
