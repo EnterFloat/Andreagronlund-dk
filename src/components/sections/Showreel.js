@@ -1,16 +1,16 @@
 import { graphql, StaticQuery } from 'gatsby';
-import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Container, Button, Row, Col, Carousel, Card } from 'react-bootstrap';
 import Video from '@common/Video';
 
 const Showreel = () => (
   <StaticQuery
     query={graphql`
       query ShowreelQuery {
-        allSanityGeneral(limit: 1) {
+        allSanityShowreel {
           edges {
             node {
-              name
+              showreel
             }
           }
         }
@@ -18,12 +18,19 @@ const Showreel = () => (
     `}
     render={data => (
       <Container>
+        <br />
         <h3>Showreel</h3>
-        <Button variant="primary">primary</Button>
-        <Video
-          videoSrcURL="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          videoTitle="Official Music Video on YouTube"
-        />
+        <Row>
+          {data.allSanityShowreel.edges.map(({ node }) => (
+            <Col style={{ textAlign: 'center', marginTop: '30px' }}>
+              <Card>
+                <Card.Body>
+                  <Video videoSrcURL={node.showreel} width={'426'} height="240" />
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </Container>
     )}
   />

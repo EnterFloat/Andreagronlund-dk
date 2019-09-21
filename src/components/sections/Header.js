@@ -25,22 +25,6 @@ const Header = () => (
             node {
               id
               frontpageimage {
-                crop {
-                  _key
-                  _type
-                  top
-                  bottom
-                  left
-                  right
-                }
-                hotspot {
-                  _key
-                  _type
-                  x
-                  y
-                  height
-                  width
-                }
                 asset {
                   fluid(maxWidth: 872, maxHeight: 981) {
                     ...GatsbySanityImageFluid
@@ -95,11 +79,6 @@ function lastName(name) {
 var MarginBottom = {
   marginBottom: '8px',
 };
-
-// const ConsoleLog = ({ children }) => {
-//   console.log(children);
-//   return false;
-// };
 
 const HeaderWrapper = styled.header`
   background-color: ${props => props.theme.color.white.regular};

@@ -1,10 +1,8 @@
-// import React from 'react';
 import React from 'react';
+
 import { StaticQuery, graphql, Link } from 'gatsby';
 
 import { StaticRouter as Router, Route } from 'react-router-dom'
-// import { Router } from 'react-router';
-// import Component from 'gatsby';
 
 import styled from 'styled-components';
 
@@ -13,9 +11,6 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { createBrowserHistory } from 'history';
 
 const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
-
-
-// const history = createMemoryHistory();
 
 const MainNavbar = (Component) => (
   <StaticQuery
@@ -110,9 +105,9 @@ const MainNavbar = (Component) => (
             <Route path="/" exact component={Component.IndexPage} />
             <Route path="/om-mig" exact component={Component.OmMigPage} />
             <Route path="/cv" exact component={Component.CVPage} />
-            <Route path="/film" exact component={Component.FilmPage} />
-            <Route path="/castingbilleder" exact component={Component.OmMigPage} />
-            <Route path="/showreel" exact component={Component.OmMigPage} />
+            <Route path="/film"  component={Component.FilmPage} />
+            <Route path="/castingbilleder"  component={Component.OmMigPage} />
+            <Route path="/showreel"  component={Component.OmMigPage} />
             <Route path="/kontakt" exact component={Component.KontaktPage} />
           </Router>
         </div>

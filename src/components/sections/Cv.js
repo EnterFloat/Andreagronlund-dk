@@ -6,9 +6,8 @@ import {
   Col,
   Container as BootstrapContainer,
   Table,
-  ButtonToolbar,
-  ToggleButtonGroup,
-  ToggleButton,
+  Nav,
+  Card,
 } from 'react-bootstrap';
 
 import { Component } from 'react';
@@ -16,7 +15,7 @@ import { Component } from 'react';
 class Cv extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: '2' };
+    this.state = { selectedOption: '1' };
   }
   handleOptionChange = changeEvent => {
     this.setState({
@@ -171,6 +170,11 @@ class Cv extends Component {
 
   render() {
     const { data } = this.props;
+    
+    function StyledNavLink(props) {
+      return <Nav.Link style={{color: "black"}} {...props} />
+    }
+    
     return (
       <BootstrapContainer key="container">
         {data.allSanityGeneral.edges.map(({ node }) => (
@@ -200,59 +204,66 @@ class Cv extends Component {
                 lg={{ span: 12, offset: 0 }}
                 xl={{ span: 12, offset: 0 }}
               >
-                <ButtonToolbar>
-                  <ToggleButtonGroup
-                    type="radio"
-                    name="options"
-                    defaultValue={this.state.selectedOption}
-                  >
-                    <ToggleButton
-                      value={'1'}
-                      centered
-                      variant="outline-secondary"
-                      checked={this.state.selectedOption === '1'}
-                      onChange={this.handleOptionChange}
-                    >
-                      Film og TV
-                    </ToggleButton>
-                    <ToggleButton
-                      value={'2'}
-                      centered
-                      variant="outline-secondary"
-                      checked={this.state.selectedOption === '2'}
-                      onChange={this.handleOptionChange}
-                    >
-                      Teater
-                    </ToggleButton>
-                    <ToggleButton
-                      value={'3'}
-                      centered
-                      variant="outline-secondary"
-                      checked={this.state.selectedOption === '3'}
-                      onChange={this.handleOptionChange}
-                    >
-                      Kurser og uddannelser
-                    </ToggleButton>
-                    <ToggleButton
-                      value={'4'}
-                      centered
-                      variant="outline-secondary"
-                      checked={this.state.selectedOption === '4'}
-                      onChange={this.handleOptionChange}
-                    >
-                      Anden bedrift
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </ButtonToolbar>
                 <br />
-                <Table striped bordered hover>
-                  <this.SchemaHead option={this.state.selectedOption} />
-                  <this.SchemaBody
-                    data={data}
-                    option={this.state.selectedOption}
-                  />
-                </Table>
               </Col>
+            </Row>
+            <Row>
+              <Card>
+                <Card.Header>
+                  <Nav
+                    fill
+                    variant="tabs"
+                    defaultActiveKey={this.state.selectedKey}
+                    onSelect={selectedKey =>
+                      this.setState({
+                        selectedOption: selectedKey,
+                      })
+                    }
+                  >
+                    <Nav.Item>
+                      <StyledNavLink
+                        active={this.state.selectedOption === '1'}
+                        eventKey="1"
+                      >
+                        Film og TV
+                      </StyledNavLink>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <StyledNavLink
+                        active={this.state.selectedOption === '2'}
+                        eventKey="2"
+                      >
+                        Teater
+                      </StyledNavLink>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <StyledNavLink
+                        active={this.state.selectedOption === '3'}
+                        eventKey="3"
+                      >
+                        Kurser og uddannelser
+                      </StyledNavLink>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <StyledNavLink
+                        active={this.state.selectedOption === '4'}
+                        eventKey="4"
+                      >
+                        Anden bedrift
+                      </StyledNavLink>
+                    </Nav.Item>
+                  </Nav>
+                </Card.Header>
+                <Card.Body>
+                  <Table striped bordered hover>
+                    <this.SchemaHead option={this.state.selectedOption} />
+                    <this.SchemaBody
+                      data={data}
+                      option={this.state.selectedOption}
+                    />
+                  </Table>
+                </Card.Body>
+              </Card>
             </Row>
           </>
         ))}
