@@ -37,9 +37,9 @@ const Footer = () => (
         <FooterWrapper>
           <hr />
           {data.allSanityGeneral.edges.map(({ node }) => (
-            <StyledContainer>
+            <StyledContainer key="Container">
               <Copyright>
-                <div key="container">
+                <div key="Container">
                   <Paragraph key="mobile">Telefon: {node.mobile}</Paragraph>
                   <Paragraph key="mail">Mail: {node.email}</Paragraph>
                   <br />

@@ -12,6 +12,21 @@ import {
 
 import { Component } from 'react';
 
+function TitleAndYear(props) {
+  if (props.year === null) {
+    return <td {...props}>{props.title}</td>;
+  } else {
+    return (
+      <td {...props}>
+        {props.title}
+        {' ('}
+        {props.year}
+        {')'}
+      </td>
+    );
+  }
+}
+
 class Cv extends Component {
   constructor(props) {
     super(props);
@@ -90,13 +105,8 @@ class Cv extends Component {
         return (
           <tbody>
             {props.data.allSanityFilmandtv.edges.map(({ node }) => (
-              <tr>
-                <td>
-                  {node.title}
-                  {' ('}
-                  {node.year}
-                  {')'}
-                </td>
+              <tr key={node.id}>
+                <TitleAndYear title={node.title} year={node.year} />
                 <td>{node.role}</td>
                 <td>{node.instructor}</td>
                 <td>{node.producer}</td>
@@ -109,13 +119,8 @@ class Cv extends Component {
         return (
           <tbody>
             {props.data.allSanityTheater.edges.map(({ node }) => (
-              <tr>
-                <td>
-                  {node.title}
-                  {' ('}
-                  {node.year}
-                  {')'}
-                </td>
+              <tr key={node.id}>
+                <TitleAndYear title={node.title} year={node.year} />
                 <td>{node.role}</td>
                 <td>{node.instructor}</td>
                 <td>{node.organiser}</td>
@@ -128,13 +133,8 @@ class Cv extends Component {
         return (
           <tbody>
             {props.data.allSanityEducation.edges.map(({ node }) => (
-              <tr>
-                <td>
-                  {node.title}
-                  {' ('}
-                  {node.year}
-                  {')'}
-                </td>
+              <tr key={node.id}>
+                <TitleAndYear title={node.title} year={node.year} />
                 <td>{node.teacher}</td>
                 <td>{node.description}</td>
               </tr>
@@ -146,7 +146,7 @@ class Cv extends Component {
         return (
           <tbody>
             {props.data.allSanityOther.edges.map(({ node }) => (
-              <tr>
+              <tr key={node.id}>
                 <td>{node.title}</td>
                 <td>{node.description}</td>
               </tr>
@@ -170,103 +170,112 @@ class Cv extends Component {
 
   render() {
     const { data } = this.props;
-    
+    data.allSanityFilmandtv.edges.sort(function(a, b) {
+      return b.node.year - a.node.year;
+    });
+    data.allSanityTheater.edges.sort(function(a, b) {
+      return b.node.year - a.node.year;
+    });
+    data.allSanityEducation.edges.sort(function(a, b) {
+      return b.node.year - a.node.year;
+    });
+
     function StyledNavLink(props) {
-      return <Nav.Link style={{color: "black"}} {...props} />
+      return <Nav.Link style={{ color: 'black' }} {...props} />;
     }
-    
+
     return (
       <BootstrapContainer key="container">
-        {data.allSanityGeneral.edges.map(({ node }) => (
-          <>
-            <Row>
-              <Col>
-                <br />
-                <h2>CV</h2>
-                <br />
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                xs={{ span: 8, offset: 2 }}
-                sm={{ span: 8, offset: 2 }}
-                md={{ span: 6, offset: 3 }}
-                lg={{ span: 4, offset: 0 }}
-                xl={{ span: 4, offset: 0 }}
-                style={{ marginBottom: 30 }}
-              >
+        <>
+          <Row key="Row1">
+            <Col>
+              <br />
+              <h2>CV</h2>
+              <br />
+            </Col>
+          </Row>
+          <Row key="Row2">
+            <Col
+              xs={{ span: 8, offset: 2 }}
+              sm={{ span: 8, offset: 2 }}
+              md={{ span: 6, offset: 3 }}
+              lg={{ span: 4, offset: 0 }}
+              xl={{ span: 4, offset: 0 }}
+              style={{ marginBottom: 30 }}
+            >
+              {data.allSanityGeneral.edges.map(({ node }) => (
                 <Img key={'Image'} fluid={node.cvimage.asset.fluid} />
-              </Col>
-              <Col
-                xs={{ span: 12, offset: 0 }}
-                sm={{ span: 12, offset: 0 }}
-                md={{ span: 12, offset: 0 }}
-                lg={{ span: 12, offset: 0 }}
-                xl={{ span: 12, offset: 0 }}
-              >
-                <br />
-              </Col>
-            </Row>
-            <Row>
-              <Card>
-                <Card.Header>
-                  <Nav
-                    fill
-                    variant="tabs"
-                    defaultActiveKey={this.state.selectedKey}
-                    onSelect={selectedKey =>
-                      this.setState({
-                        selectedOption: selectedKey,
-                      })
-                    }
-                  >
-                    <Nav.Item>
-                      <StyledNavLink
-                        active={this.state.selectedOption === '1'}
-                        eventKey="1"
-                      >
-                        Film og TV
-                      </StyledNavLink>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <StyledNavLink
-                        active={this.state.selectedOption === '2'}
-                        eventKey="2"
-                      >
-                        Teater
-                      </StyledNavLink>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <StyledNavLink
-                        active={this.state.selectedOption === '3'}
-                        eventKey="3"
-                      >
-                        Kurser og uddannelser
-                      </StyledNavLink>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <StyledNavLink
-                        active={this.state.selectedOption === '4'}
-                        eventKey="4"
-                      >
-                        Anden bedrift
-                      </StyledNavLink>
-                    </Nav.Item>
-                  </Nav>
-                </Card.Header>
-                <Card.Body>
-                  <Table striped bordered hover>
-                    <this.SchemaHead option={this.state.selectedOption} />
-                    <this.SchemaBody
-                      data={data}
-                      option={this.state.selectedOption}
-                    />
-                  </Table>
-                </Card.Body>
-              </Card>
-            </Row>
-          </>
-        ))}
+              ))}
+            </Col>
+            <Col
+              xs={{ span: 12, offset: 0 }}
+              sm={{ span: 12, offset: 0 }}
+              md={{ span: 12, offset: 0 }}
+              lg={{ span: 12, offset: 0 }}
+              xl={{ span: 12, offset: 0 }}
+            >
+              <br />
+            </Col>
+          </Row>
+          <Row key="Row3">
+            <Card>
+              <Card.Header>
+                <Nav
+                  fill
+                  variant="tabs"
+                  defaultActiveKey={this.state.selectedKey}
+                  onSelect={selectedKey =>
+                    this.setState({
+                      selectedOption: selectedKey,
+                    })
+                  }
+                >
+                  <Nav.Item>
+                    <StyledNavLink
+                      active={this.state.selectedOption === '1'}
+                      eventKey="1"
+                    >
+                      Film og TV
+                    </StyledNavLink>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <StyledNavLink
+                      active={this.state.selectedOption === '2'}
+                      eventKey="2"
+                    >
+                      Teater
+                    </StyledNavLink>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <StyledNavLink
+                      active={this.state.selectedOption === '3'}
+                      eventKey="3"
+                    >
+                      Kurser og uddannelser
+                    </StyledNavLink>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <StyledNavLink
+                      active={this.state.selectedOption === '4'}
+                      eventKey="4"
+                    >
+                      Anden bedrift
+                    </StyledNavLink>
+                  </Nav.Item>
+                </Nav>
+              </Card.Header>
+              <Card.Body>
+                <Table striped bordered hover>
+                  <this.SchemaHead option={this.state.selectedOption} />
+                  <this.SchemaBody
+                    data={data}
+                    option={this.state.selectedOption}
+                  />
+                </Table>
+              </Card.Body>
+            </Card>
+          </Row>
+        </>
       </BootstrapContainer>
     );
   }
@@ -278,6 +287,7 @@ export default props => (
         allSanityGeneral(limit: 1) {
           edges {
             node {
+              id
               cvimage {
                 asset {
                   fluid(maxWidth: 872, maxHeight: 981) {
@@ -288,9 +298,10 @@ export default props => (
             }
           }
         }
-        allSanityFilmandtv(limit: -1) {
+        allSanityFilmandtv {
           edges {
             node {
+              id
               year
               title
               role
@@ -299,17 +310,19 @@ export default props => (
             }
           }
         }
-        allSanityOther(limit: -1) {
+        allSanityOther {
           edges {
             node {
+              id
               title
               description
             }
           }
         }
-        allSanityTheater(limit: -1) {
+        allSanityTheater {
           edges {
             node {
+              id
               title
               year
               role
@@ -318,9 +331,10 @@ export default props => (
             }
           }
         }
-        allSanityEducation(limit: -1) {
+        allSanityEducation {
           edges {
             node {
+              id
               title
               year
               teacher

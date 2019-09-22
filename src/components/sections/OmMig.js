@@ -42,7 +42,7 @@ const OmMig = () => (
       <BootstrapContainer key="container">
         {data.allSanityGeneral.edges.map(({ node }) => (
           <>
-            <Row>
+            <Row key="Row1">
               <Col>
                 <br />
                 <h2>Om mig</h2>
@@ -50,7 +50,7 @@ const OmMig = () => (
               </Col>
             </Row>
 
-            <Row>
+            <Row key="Row2">
               <Col
                 xs={{ span: 8, offset: 2 }}
                 sm={{ span: 8, offset: 2 }}
@@ -75,7 +75,7 @@ const OmMig = () => (
                 <br />
               </Col>
             </Row>
-            <Row>
+            <Row key="Row3">
               <Col
                 style={{ marginTop: 20 }}
                 md={{ span: 10, offset: 1 }}

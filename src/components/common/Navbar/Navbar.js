@@ -8,9 +8,9 @@ import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 
-const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
+// const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
 
 const MainNavbar = (Component) => (
   <StaticQuery
@@ -28,7 +28,7 @@ const MainNavbar = (Component) => (
     render={data => (
       <div>
         {data.allSanityGeneral.edges.map(({ node }) => (
-          <Navbar bg="light" expand="lg" fixed="top">
+          <Navbar key="Navbar" bg="light" expand="lg" fixed="top">
             <div className="container-fluid">
               <Link
                 to={'/'}
@@ -67,21 +67,21 @@ const MainNavbar = (Component) => (
                     alignRight="true"
                   >
                     <Link
-                      to={'/film'}
+                      to={'/media/film'}
                       className={'dropdown-item'}
                       activeClassName={'active'}
                     >
                       Film
                     </Link>
                     <Link
-                      to={'/castingbilleder'}
+                      to={'/media/castingbilleder'}
                       className={'dropdown-item'}
                       activeClassName={'active'}
                     >
                       Castingbilleder
                     </Link>
                     <Link
-                      to={'/showreel'}
+                      to={'/media/showreel'}
                       className={'dropdown-item'}
                       activeClassName={'active'}
                     >
@@ -101,13 +101,13 @@ const MainNavbar = (Component) => (
           </Navbar>
         ))}
         <div>
-          <Router history={history}>
+          <Router>
             <Route path="/" exact component={Component.IndexPage} />
             <Route path="/om-mig" exact component={Component.OmMigPage} />
             <Route path="/cv" exact component={Component.CVPage} />
-            <Route path="/film"  component={Component.FilmPage} />
-            <Route path="/castingbilleder"  component={Component.OmMigPage} />
-            <Route path="/showreel"  component={Component.OmMigPage} />
+            <Route path="/media/film"  component={Component.FilmPage} />
+            <Route path="/media/castingbilleder"  component={Component.OmMigPage} />
+            <Route path="/media/showreel"  component={Component.OmMigPage} />
             <Route path="/kontakt" exact component={Component.KontaktPage} />
           </Router>
         </div>
