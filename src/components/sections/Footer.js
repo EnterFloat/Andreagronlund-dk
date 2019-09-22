@@ -48,16 +48,6 @@ const Footer = () => (
                 <Paragraph style={{textAlign: "center"}} key="Copyright">&copy; {today.getFullYear()} - {node.name}</Paragraph>
               </Copyright>
               <SocialIcons>
-                <ExternalLink
-                  key={FacebookIcon}
-                  href={'https://www.facebook.com/'}
-                >
-                  <img
-                    key={'img' + FacebookIcon}
-                    src={FacebookIcon}
-                    alt="link"
-                  />
-                </ExternalLink>
                 <ExternalLink key={InstagramIcon} href={node.instagram}>
                   <img
                     key={'img' + InstagramIcon}

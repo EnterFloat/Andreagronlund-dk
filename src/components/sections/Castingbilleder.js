@@ -35,7 +35,6 @@ const Castingbilleder = () => (
               md={{ span: 6, offset: 0 }}
               lg={{ span: 4, offset: 0 }}
               xl={{ span: 4, offset: 0 }}
-              style={{ marginBottom: 30 }}
               style={{ textAlign: 'center', marginTop: '30px' }}
             >
               <Card>

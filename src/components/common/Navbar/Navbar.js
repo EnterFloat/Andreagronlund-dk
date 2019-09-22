@@ -2,30 +2,38 @@ import React from 'react';
 
 import { StaticQuery, graphql, Link } from 'gatsby';
 
-import { StaticRouter as Router, Route } from 'react-router-dom'
+import { StaticRouter as Router, Route } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-// import { createBrowserHistory } from 'history';
+import { Component } from 'react';
 
-// const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
+class MainNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { activeNavItem: '0' };
+  }
+  handleOptionChange = changeEvent => {
+    this.setState({
+      activeNavItem: changeEvent.target.value,
+    });
+  };
 
-const MainNavbar = (Component) => (
-  <StaticQuery
-    query={graphql`
-      query NavbarQuery {
-        allSanityGeneral(limit: 1) {
-          edges {
-            node {
-              pagetitle
-            }
-          }
-        }
-      }
-    `}
-    render={data => (
+  render() {
+    const { data } = this.props;
+
+    const NavLink = styled(Link)`
+      margin-right: 20px;
+      margin-left: 20px;
+    `;
+    const StyledNavDropdown = styled(NavDropdown)`
+      margin-right: 20px;
+      margin-left: 20px;
+    `;
+
+    return (
       <div>
         {data.allSanityGeneral.edges.map(({ node }) => (
           <Navbar key="Navbar" bg="light" expand="lg" fixed="top">
@@ -54,7 +62,7 @@ const MainNavbar = (Component) => (
                   >
                     Om mig
                   </NavLink>
-                   <NavLink
+                  <NavLink
                     to={'/cv'}
                     className={'nav-link navbar-right'}
                     activeClassName={'active'}
@@ -105,24 +113,32 @@ const MainNavbar = (Component) => (
             <Route path="/" exact component={Component.IndexPage} />
             <Route path="/om-mig" exact component={Component.OmMigPage} />
             <Route path="/cv" exact component={Component.CVPage} />
-            <Route path="/media/film"  component={Component.FilmPage} />
-            <Route path="/media/castingbilleder"  component={Component.OmMigPage} />
-            <Route path="/media/showreel"  component={Component.OmMigPage} />
+            <Route path="/media/film" component={Component.FilmPage} />
+            <Route
+              path="/media/castingbilleder"
+              component={Component.OmMigPage}
+            />
+            <Route path="/media/showreel" component={Component.OmMigPage} />
             <Route path="/kontakt" exact component={Component.KontaktPage} />
           </Router>
         </div>
       </div>
-    )}
+    );
+  }
+}
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query NavbarQuery {
+        allSanityGeneral(limit: 1) {
+          edges {
+            node {
+              pagetitle
+            }
+          }
+        }
+      }
+    `}
+    render={data => <MainNavbar data={data} {...props} />}
   />
 );
-
-const NavLink = styled(Link)`
-  margin-right: 20px;
-  margin-left: 20px;
-`;
-const StyledNavDropdown = styled(NavDropdown)`
-  margin-right: 20px;
-  margin-left: 20px;
-`;
-
-export default MainNavbar;

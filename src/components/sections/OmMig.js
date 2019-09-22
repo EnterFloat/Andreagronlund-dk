@@ -130,7 +130,6 @@ function Attribute(props) {
   );
 }
 function Age(props) {
-  console.log(props.birthdate);
   var start = new Date(props.birthdate);
   var today = new Date();
   var difference = new Date(today - start).getFullYear() - 1970;

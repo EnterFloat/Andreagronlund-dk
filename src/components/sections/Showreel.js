@@ -1,6 +1,6 @@
 import { graphql, StaticQuery } from 'gatsby';
-import React, { Component } from 'react';
-import { Container, Button, Row, Col, Carousel, Card } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import Video from '@common/Video';
 
 const Showreel = () => (
