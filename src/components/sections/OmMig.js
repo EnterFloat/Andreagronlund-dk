@@ -33,6 +33,13 @@ const OmMig = () => (
                   }
                 }
               }
+              aboutmeimage2 {
+                asset {
+                  fluid(maxWidth: 872, maxHeight: 981) {
+                    ...GatsbySanityImageFluid
+                  }
+                }
+              }
             }
           }
         }
@@ -54,12 +61,22 @@ const OmMig = () => (
               <Col
                 xs={{ span: 8, offset: 2 }}
                 sm={{ span: 8, offset: 2 }}
-                md={{ span: 6, offset: 3 }}
+                md={{ span: 6, offset: 0 }}
+                lg={{ span: 4, offset: 2 }}
+                xl={{ span: 4, offset: 2 }}
+                style={{ marginBottom: 30 }}
+              >
+                <Img key={'Image'} fluid={node.aboutmeimage.asset.fluid} />
+              </Col>
+              <Col
+                xs={{ span: 8, offset: 2 }}
+                sm={{ span: 8, offset: 2 }}
+                md={{ span: 6, offset: 0 }}
                 lg={{ span: 4, offset: 0 }}
                 xl={{ span: 4, offset: 0 }}
                 style={{ marginBottom: 30 }}
               >
-                <Img key={'Image'} fluid={node.aboutmeimage.asset.fluid} />
+                <Img key={'Image2'} fluid={node.aboutmeimage2.asset.fluid} />
               </Col>
               <Col
                 xs={{ span: 12, offset: 0 }}
@@ -71,16 +88,15 @@ const OmMig = () => (
                 <p style={{ whiteSpace: 'pre-wrap', fontSize: '120%' }}>
                   {node.aboutme}
                 </p>
-                <br />
-                <br />
+                <br/>
+                <br/>
               </Col>
-            </Row>
-            <Row key="Row3">
               <Col
-                style={{ marginTop: 20 }}
                 md={{ span: 10, offset: 1 }}
                 sm={{ span: 12, offset: 0 }}
                 xs={{ span: 12, offset: 0 }}
+                lg={{ span: 4, offset: 0 }}
+                xl={{ span: 4, offset: 0 }}
               >
                 <Attribute
                   category={'Alder'}
@@ -110,6 +126,9 @@ const OmMig = () => (
                   unit={''}
                 />
               </Col>
+            </Row>
+            <Row key="Row3">
+              
             </Row>
           </>
         ))}

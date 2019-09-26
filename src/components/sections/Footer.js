@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import { Container } from '@components/global';
 import ExternalLink from '@common/ExternalLink';
 
-import FacebookIcon from '@static/icons/facebook.svg';
+import ImdbIcon from '@static/icons/imdb.svg';
 import InstagramIcon from '@static/icons/instagram.svg';
 
 const today = new Date();
@@ -23,6 +23,7 @@ const Footer = () => (
               mobile
               instagram
               dask
+              imdb
             }
           }
         }
@@ -50,17 +51,26 @@ const Footer = () => (
               <SocialIcons>
                 <ExternalLink key={InstagramIcon} href={node.instagram}>
                   <img
+                    style={{ width: "25" }}
                     key={'img' + InstagramIcon}
                     src={InstagramIcon}
                     alt="link"
                   />
                 </ExternalLink>
+                <ExternalLink key={ImdbIcon} href={node.imdb}>
+                  <img
+                  style={{ width: "50" }}
+                    key={'img' + ImdbIcon}
+                    src={ImdbIcon}
+                    alt="link"
+                  />
+                </ExternalLink>
                 <ExternalLink
-                  style={{ color: 'black', paddingLeft: 5 }}
+                  style={{ color: 'black', marginLeft: "8px" }}
                   href={node.dask}
                 >
                   <h4>Dask</h4>
-                </ExternalLink>
+                </ExternalLink>              
               </SocialIcons>
             </StyledContainer>
           ))}
@@ -75,8 +85,7 @@ const SocialIcons = styled.div`
 
   img {
     margin: 0 8px;
-    width: 24px;
-    height: 24px;
+    height: 25px;
   }
 
   @media (max-width: ${props => props.theme.screen.sm}) {
