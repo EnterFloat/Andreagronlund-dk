@@ -27,15 +27,26 @@ const OmMig = () => (
               location
               id
               aboutmeimage {
+                crop {
+                  top
+                  bottom
+                  left
+                  right
+                }
+                hotspot {
+                  x
+                  y
+                }
                 asset {
-                  fluid(maxWidth: 872, maxHeight: 981) {
+                  id
+                  fluid(maxWidth: 400, maxHeight: 400) {
                     ...GatsbySanityImageFluid
                   }
                 }
               }
               aboutmeimage2 {
                 asset {
-                  fluid(maxWidth: 872, maxHeight: 981) {
+                  fluid(maxWidth: 600, maxHeight: 400) {
                     ...GatsbySanityImageFluid
                   }
                 }
@@ -60,15 +71,25 @@ const OmMig = () => (
             <Row key="Row2">
               <Col
                 xs={{ span: 8, offset: 2 }}
-                sm={{ span: 8, offset: 2 }}
-                md={{ span: 6, offset: 0 }}
-                lg={{ span: 4, offset: 2 }}
-                xl={{ span: 4, offset: 2 }}
-                style={{ marginBottom: 30 }}
+                sm={{ span: 10, offset: 1 }}
+                md={{ span: 4, offset: 1 }}
+                lg={{ span: 4, offset: 1 }}
+                xl={{ span: 4, offset: 1 }}
+                style={{ marginBottom: 30}}
               >
-                <Img key={'Image'} fluid={node.aboutmeimage.asset.fluid} />
+                <Img key={'Image'} style={{height: "100%"}} fluid={node.aboutmeimage.asset.fluid} />
               </Col>
               <Col
+                xs={{ span: 8, offset: 2 }}
+                sm={{ span: 10, offset: 1 }}
+                md={{ span: 6, offset: 0 }}
+                lg={{ span: 6, offset: 0 }}
+                xl={{ span: 6, offset: 0 }}
+                style={{ marginBottom: 30 }}
+              >
+                <Img key={'Image'} style={{height: "100%"}} fluid={node.aboutmeimage2.asset.fluid} />
+              </Col>
+              {/* <Col
                 xs={{ span: 8, offset: 2 }}
                 sm={{ span: 8, offset: 2 }}
                 md={{ span: 6, offset: 0 }}
@@ -77,7 +98,7 @@ const OmMig = () => (
                 style={{ marginBottom: 30 }}
               >
                 <Img key={'Image2'} fluid={node.aboutmeimage2.asset.fluid} />
-              </Col>
+              </Col> */}
               <Col
                 xs={{ span: 12, offset: 0 }}
                 sm={{ span: 12, offset: 0 }}
@@ -88,8 +109,8 @@ const OmMig = () => (
                 <p style={{ whiteSpace: 'pre-wrap', fontSize: '120%' }}>
                   {node.aboutme}
                 </p>
-                <br/>
-                <br/>
+                <br />
+                <br />
               </Col>
               <Col
                 md={{ span: 10, offset: 1 }}
@@ -127,9 +148,7 @@ const OmMig = () => (
                 />
               </Col>
             </Row>
-            <Row key="Row3">
-              
-            </Row>
+            <Row key="Row3"></Row>
           </>
         ))}
       </BootstrapContainer>

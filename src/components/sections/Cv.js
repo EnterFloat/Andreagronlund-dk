@@ -195,7 +195,7 @@ class Cv extends Component {
             </Col>
           </Row>
           <Row key="Row2">
-            <Col
+            {/* <Col
               xs={{ span: 8, offset: 2 }}
               sm={{ span: 8, offset: 2 }}
               md={{ span: 6, offset: 3 }}
@@ -203,10 +203,37 @@ class Cv extends Component {
               xl={{ span: 4, offset: 0 }}
               style={{ marginBottom: 30 }}
             >
-              {data.allSanityGeneral.edges.map(({ node }) => (
                 <Img key={'Image'} fluid={node.cvimage.asset.fluid} />
+            </Col> */}
+            
+            {data.allSanityGeneral.edges.map(({ node }) => (
+              <>
+            <Col
+                id={"Col1"}
+                xs={{ span: 8, offset: 2 }}
+                sm={{ span: 10, offset: 1 }}
+                md={{ span: 3, offset: 1 }}
+                lg={{ span: 3, offset: 1 }}
+                xl={{ span: 3, offset: 1 }}
+                style={{ marginBottom: 30}}
+              >
+                <Img key={'Image'} style={{height: "100%"}} fluid={node.cvimage.asset.fluid} />
+              </Col>
+              <Col
+                id={"Col1"}
+                xs={{ span: 8, offset: 2 }}
+                sm={{ span: 10, offset: 1 }}
+                md={{ span: 7, offset: 0 }}
+                lg={{ span: 7, offset: 0 }}
+                xl={{ span: 7, offset: 0 }}
+                style={{ marginBottom: 30 }}
+              >
+                <Img key={'Image'} style={{height: "100%"}} fluid={node.cvimage2.asset.fluid} />
+              </Col>
+              </>
               ))}
-            </Col>
+              
+
             <Col
               xs={{ span: 12, offset: 0 }}
               sm={{ span: 12, offset: 0 }}
@@ -290,7 +317,14 @@ export default props => (
               id
               cvimage {
                 asset {
-                  fluid(maxWidth: 872, maxHeight: 981) {
+                  fluid(maxWidth: 300, maxHeight: 400) {
+                    ...GatsbySanityImageFluid
+                  }
+                }
+              }
+              cvimage2 {
+                asset {
+                  fluid(maxWidth: 700, maxHeight: 400) {
                     ...GatsbySanityImageFluid
                   }
                 }
