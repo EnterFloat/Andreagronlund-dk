@@ -41,6 +41,9 @@ class Castingbilleder extends Component {
                 <Card.Body>
                   <Img key="Image" fluid={node.otherimage.asset.fluid} />
                 </Card.Body>
+                <Card.Text>
+                  <p style={{fontSize: "80%"}}>{node.otherimage.caption}</p>
+                </Card.Text>
               </Card>
             </Col>
           ))}
