@@ -59,7 +59,7 @@ export default props => (
                 otherimage {
                   caption
                   asset {
-                    fluid(maxWidth: 872, maxHeight: 981) {
+                    fluid(maxWidth: 590, maxHeight: 885) {
                       ...GatsbySanityImageFluid
                     }
                   }
