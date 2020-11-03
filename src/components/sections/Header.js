@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
+import Video from '@common/Video';
+import "../../styles/videostyles.css"
 
 const Header = () => (
   <StaticQuery
@@ -31,6 +33,7 @@ const Header = () => (
                   }
                 }
               }
+              frontpagefilm
             }
           }
         }
@@ -38,31 +41,63 @@ const Header = () => (
     `}
     render={data => (
       <HeaderWrapper id="hjem">
-        <Container>
-          <Grid>
-            <Margin>
-              {data.allSanityFrontpageimages.edges.map(({ node }) => (
-                <Img key={node.id} fluid={node.frontpageimage.asset.fluid} />
-              ))}
-            </Margin>
-            {data.allSanityGeneral.edges.map(({ node }) => (
-              <Text key="text">
-                <h2 key="firstName" style={MarginBottom}>
-                  {firstName(node.name)}
-                  {lastName(node.name)}
+        <div style={{ backgroundColor: 'white' }}>
+          <Container>
+            <Grid>
+              <Margin>
+                {data.allSanityFrontpageimages.edges.map(({ node }) => (
+                  <Img key={node.id} fluid={node.frontpageimage.asset.fluid} />
+                ))}
+              </Margin>
+              {data.allSanityGeneral.edges.map(({ node }) => (
+                <Text key="text">
+                  <h2 key="firstName" style={MarginBottom}>
+                    {firstName(node.name)}
+                    {lastName(node.name)}
+                    <br />
+                  </h2>
+                  <h2 style={{ color: '#8a8a8a' }} key="pageSubtitle">
+                    {node.pagesubtitle}
+                  </h2>
                   <br />
-                </h2>
-                <h2 style={{ color: '#8a8a8a' }} key="pageSubtitle">
-                  {node.pagesubtitle}
-                </h2>
-                <br />
-                <p>
-                  <StyledLink to="/om-mig">Om mig &nbsp;&#x2794;</StyledLink>
-                </p>
-              </Text>
-            ))}
-          </Grid>
-        </Container>
+                  <p>
+                    <StyledLink to="/om-mig">Om mig &nbsp;&#x2794;</StyledLink>
+                  </p>
+                </Text>
+              ))}
+            </Grid>
+          </Container>
+        </div>
+        {data.allSanityFrontpageimages.edges.map(({ node }) => (
+        <Videocontainer>
+          <div style={{height: "calc(100% - 56px)"}}>
+          <iframe
+          src={`${node.frontpagefilm}?rel=0&autoplay=1&mute=1&loop=1&controls=1&modestbranding=1&rel=0`}
+          frameborder="0"
+          
+            parameters="showinfo=0"
+            title=""
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            frameBorder="0"
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true"
+            allowFullScreen            
+            height="100%"
+            width="100%"
+            style={{
+              position: 'relative',
+              top: '0',
+              left: '0',              
+            }}
+          />
+          {/* width: '100%',
+              height: '100%', */}
+          {/* width={props.width}
+            height={props.height} */}
+            {/* <Video videoSrcURL={'https://www.youtube.com/embed/dQw4w9WgXcQ'} /> */}
+          </div>
+        </Videocontainer>
+        ))}
       </HeaderWrapper>
     )}
   />
@@ -82,9 +117,9 @@ var MarginBottom = {
 
 const HeaderWrapper = styled.header`
   background-color: ${props => props.theme.color.white.regular};
-
+  background-color: #f8f9fa;
   @media (max-width: ${props => props.theme.screen.md}) {
-    padding-top: 30px;
+    margin-top: 30px;
   }
 `;
 
@@ -100,6 +135,7 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   grid-gap: 64px;
+  background-color: white;
 
   @media (max-width: ${props => props.theme.screen.md}) {
     grid-template-columns: 1fr;
@@ -157,6 +193,27 @@ const Container = styled.div`
     `
     max-width: 1200px !important;
   `};
+`;
+const Videocontainer = styled.div`
+  position: relative;
+  height: calc(100vh - 2 * 56px);
+  backgroundcolor: #f8f9fa;
+  margin: 56px;
+
+  @media (max-width: ${props => props.theme.screen.xs}) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  @media (max-width: ${props => props.theme.screen.sm}) {    
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 60vh;
+    min-height: 300px;
+  }
+  @media (min-width: ${props => props.theme.screen.md}) {
+    margin: 56px;
+  }
 `;
 
 export default Header;
