@@ -89,12 +89,7 @@ const Header = () => (
               top: '0',
               left: '0',              
             }}
-          />
-          {/* width: '100%',
-              height: '100%', */}
-          {/* width={props.width}
-            height={props.height} */}
-            {/* <Video videoSrcURL={'https://www.youtube.com/embed/dQw4w9WgXcQ'} /> */}
+          />          
           </div>
         </Videocontainer>
         ))}
@@ -206,9 +201,10 @@ const Videocontainer = styled.div`
   }
 
   @media (max-width: ${props => props.theme.screen.sm}) {    
-    margin-left: 0px;
-    margin-right: 0px;
-    height: 60vh;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 0;
+    height: 300px;
     min-height: 300px;
   }
   @media (min-width: ${props => props.theme.screen.md}) {
